@@ -9,13 +9,35 @@
 import UIKit
 import Firebase
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     let plusPhotoButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "add-image"), for: .normal)
+        button.addTarget(self, action: #selector(handlePlusPhoto), for: .touchUpInside)
         return button
     }()
+    
+    @objc func handlePlusPhoto() {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        imagePickerController.allowsEditing = true
+        present(imagePickerController, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let editedImage = info[.editedImage] as? UIImage {
+            plusPhotoButton.setImage(editedImage, for: .normal)
+        } else if let originalImage = info[.originalImage] as? UIImage {
+            plusPhotoButton.setImage(originalImage, for: .normal)
+        }
+        plusPhotoButton.layer.cornerRadius = plusPhotoButton.frame.width/2
+        plusPhotoButton.layer.masksToBounds = true
+        plusPhotoButton.layer.borderColor = UIColor.black.cgColor
+        plusPhotoButton.layer.borderWidth = 3
+        
+        dismiss(animated: true, completion: nil)
+    }
     
     let emailTextField: UITextField = {
         let tf = UITextField()
@@ -84,13 +106,41 @@ class ViewController: UIViewController {
         guard let username = usernameTextField.text, username.count > 0 else { return }
         guard let password = passwordTextField.text, password.count  > 0 else { return }
         
-        Auth.auth().createUser(withEmail: email, password: password) { (user: AuthDataResult?, error: Error?) in
+        Auth.auth().createUser(withEmail: email, password: password) { (data: AuthDataResult?, error: Error?) in
             if let err = error {
                 print("Failed to create user", err)
                 return
             }
             
-            print("Successfully created user:", user?.user.uid ?? "")
+            print("Successfully created user:", data?.user.uid ?? "")
+            guard let image = self.plusPhotoButton.imageView?.image else { return }
+            guard let uploadData = image.jpegData(compressionQuality: 0.3) else { return }
+            
+            Storage.storage().reference().child("profile_image").putData(uploadData, metadata: nil, completion: { (metadata, err) in
+                if let err = err {
+                    print("Failed to upload profile image:", err)
+                    return
+                }
+                guard let profileImageDescription = metadata?.bucket.description else { return }
+               
+//                let storeReference = storeRef.downloadURL
+                print("Successfully uploaded profile image", profileImageDescription)
+//                print("Successfully uploaded profile image", storeReference)
+            })
+            
+//            guard let uid = data?.user.uid else { return }
+//
+//            let usernameValues = ["username": username]
+//            let values = [uid: usernameValues]
+//
+//            Database.database().reference().child("users").updateChildValues(values, withCompletionBlock: { (err, ref) in
+//                if let err = err {
+//                    print("Failed to save user info into db", err)
+//                    return
+//                }
+//
+//                print("Successfully saved user info into db")
+//            })
         }
     }
     
