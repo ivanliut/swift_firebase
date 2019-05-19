@@ -15,6 +15,8 @@
 		C33CF66A2285F43600D01B0D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C33CF6682285F43600D01B0D /* Main.storyboard */; };
 		C33CF66C2285F43800D01B0D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C33CF66B2285F43800D01B0D /* Assets.xcassets */; };
 		C33CF66F2285F43800D01B0D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C33CF66D2285F43800D01B0D /* LaunchScreen.storyboard */; };
+		C357CE2D228DE6B500BE077A /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C357CE2C228DE6B500BE077A /* MainTabBarController.swift */; };
+		C357CE2F228DEDB400BE077A /* UserProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C357CE2E228DEDB400BE077A /* UserProfileController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		C33CF66B2285F43800D01B0D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C33CF66E2285F43800D01B0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C33CF6702285F43800D01B0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C357CE2C228DE6B500BE077A /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		C357CE2E228DEDB400BE077A /* UserProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,12 +87,14 @@
 			children = (
 				C30077DF2287970600EF345F /* Utils */,
 				C33CF6642285F43600D01B0D /* AppDelegate.swift */,
+				C357CE2C228DE6B500BE077A /* MainTabBarController.swift */,
 				C33CF6662285F43600D01B0D /* ViewController.swift */,
 				C33CF6682285F43600D01B0D /* Main.storyboard */,
 				C33CF66B2285F43800D01B0D /* Assets.xcassets */,
 				C33CF66D2285F43800D01B0D /* LaunchScreen.storyboard */,
 				C33CF6702285F43800D01B0D /* Info.plist */,
 				C31BB6D722886AA300942629 /* GoogleService-Info.plist */,
+				C357CE2E228DEDB400BE077A /* UserProfileController.swift */,
 			);
 			path = "app-firebase";
 			sourceTree = "<group>";
@@ -99,7 +105,6 @@
 				B95C7378544EBC18F6359405 /* Pods-app-firebase.debug.xcconfig */,
 				4D81E9F23FA41C0E208E8BDD /* Pods-app-firebase.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -230,6 +235,8 @@
 			files = (
 				C33CF6672285F43600D01B0D /* ViewController.swift in Sources */,
 				C30077E12287976200EF345F /* Extensions.swift in Sources */,
+				C357CE2D228DE6B500BE077A /* MainTabBarController.swift in Sources */,
+				C357CE2F228DEDB400BE077A /* UserProfileController.swift in Sources */,
 				C33CF6652285F43600D01B0D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
