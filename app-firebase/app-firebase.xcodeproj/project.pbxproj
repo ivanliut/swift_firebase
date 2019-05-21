@@ -17,6 +17,7 @@
 		C33CF66F2285F43800D01B0D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C33CF66D2285F43800D01B0D /* LaunchScreen.storyboard */; };
 		C357CE2D228DE6B500BE077A /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C357CE2C228DE6B500BE077A /* MainTabBarController.swift */; };
 		C357CE2F228DEDB400BE077A /* UserProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C357CE2E228DEDB400BE077A /* UserProfileController.swift */; };
+		C362169C229325290051A117 /* UserProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C362169B229325290051A117 /* UserProfileHeader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		C33CF6702285F43800D01B0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C357CE2C228DE6B500BE077A /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		C357CE2E228DEDB400BE077A /* UserProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileController.swift; sourceTree = "<group>"; };
+		C362169B229325290051A117 /* UserProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileHeader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 		C33CF6632285F43600D01B0D /* app-firebase */ = {
 			isa = PBXGroup;
 			children = (
+				C362169A2293248B0051A117 /* UserProfile */,
 				C30077DF2287970600EF345F /* Utils */,
 				C33CF6642285F43600D01B0D /* AppDelegate.swift */,
 				C357CE2C228DE6B500BE077A /* MainTabBarController.swift */,
@@ -94,9 +97,17 @@
 				C33CF66D2285F43800D01B0D /* LaunchScreen.storyboard */,
 				C33CF6702285F43800D01B0D /* Info.plist */,
 				C31BB6D722886AA300942629 /* GoogleService-Info.plist */,
-				C357CE2E228DEDB400BE077A /* UserProfileController.swift */,
 			);
 			path = "app-firebase";
+			sourceTree = "<group>";
+		};
+		C362169A2293248B0051A117 /* UserProfile */ = {
+			isa = PBXGroup;
+			children = (
+				C357CE2E228DEDB400BE077A /* UserProfileController.swift */,
+				C362169B229325290051A117 /* UserProfileHeader.swift */,
+			);
+			path = UserProfile;
 			sourceTree = "<group>";
 		};
 		EAD0027FC9E50F2BAC0593C3 /* Pods */ = {
@@ -236,6 +247,7 @@
 				C33CF6672285F43600D01B0D /* ViewController.swift in Sources */,
 				C30077E12287976200EF345F /* Extensions.swift in Sources */,
 				C357CE2D228DE6B500BE077A /* MainTabBarController.swift in Sources */,
+				C362169C229325290051A117 /* UserProfileHeader.swift in Sources */,
 				C357CE2F228DEDB400BE077A /* UserProfileController.swift in Sources */,
 				C33CF6652285F43600D01B0D /* AppDelegate.swift in Sources */,
 			);
