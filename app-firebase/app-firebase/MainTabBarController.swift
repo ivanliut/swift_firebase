@@ -7,11 +7,25 @@
 //
 
 import UIKit
+import Firebase
 
-class MaiTabBarController: UITabBarController {
+class MainTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .blue
+        
+        if Auth.auth().currentUser == nil {
+            DispatchQueue.main.async {
+                let loginController = LoginController()
+                let navController = UINavigationController(rootViewController: loginController)
+                self.present(navController, animated: true, completion: nil)
+            }
+            return
+        }
+        
+        setupViewControllers()
+    }
+    
+    func setupViewControllers() {
         let layout = UICollectionViewFlowLayout()
         let userProfileController = UserProfileController(collectionViewLayout: layout)
         
@@ -24,4 +38,5 @@ class MaiTabBarController: UITabBarController {
         
         viewControllers = [navController, UIViewController()]
     }
+    
 }
