@@ -33,6 +33,10 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         alertController.addAction(UIAlertAction(title: "Log out", style: .destructive, handler: { (_) in
             do {
                 try Auth.auth().signOut()
+                let loginController = LoginController()
+                let navController = UINavigationController(rootViewController: loginController)
+                self.present(navController, animated: true, completion: nil)
+                
             } catch let signOutErr {
                 print("Failed to sigm out", signOutErr)
             }
@@ -87,7 +91,6 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
             self.user = User(dictionary: dictionary)
             
             self.navigationItem.title = self.user?.username
-            
             self.collectionView.reloadData()
             
         }) { (err) in

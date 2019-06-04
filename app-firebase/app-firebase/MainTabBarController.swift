@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class MaiTabBarController: UITabBarController {
+class MainTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -22,7 +22,10 @@ class MaiTabBarController: UITabBarController {
             return
         }
         
-        view.backgroundColor = .blue
+        setupViewControllers()
+    }
+    
+    func setupViewControllers() {
         let layout = UICollectionViewFlowLayout()
         let userProfileController = UserProfileController(collectionViewLayout: layout)
         
@@ -35,4 +38,5 @@ class MaiTabBarController: UITabBarController {
         
         viewControllers = [navController, UIViewController()]
     }
+    
 }
