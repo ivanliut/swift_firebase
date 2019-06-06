@@ -27,8 +27,8 @@ class MainTabBarController: UITabBarController {
     
     func setupViewControllers() {
         //home
-        let homeNavController = templateNavController(unselectedImage: UIImage(named: "home")!, selectedImage: UIImage(named: "home-filled")!)
-        
+        let homeNavController = templateNavController(unselectedImage: UIImage(named: "home")!, selectedImage: UIImage(named: "home-filled")!, rootViewController: UserProfileController(collectionViewLayout: UICollectionViewFlowLayout()))
+       
         //search
         let searchNavController = templateNavController(unselectedImage: UIImage(named: "search")!, selectedImage: UIImage(named: "search-filled")!)
         
@@ -54,10 +54,17 @@ class MainTabBarController: UITabBarController {
                            plusNavController,
                            heartNavController,
                            userProfileNavController]
+        //modify tab bar item insets
+        guard let items = tabBar.items else {
+            return
+        }
+        for item in items {
+            item.imageInsets = UIEdgeInsets(top: 15, left: 0, bottom: -15, right: 0)
+        }
     }
     
-    fileprivate func templateNavController(unselectedImage: UIImage, selectedImage: UIImage) -> UINavigationController {
-        let viewController = UIViewController()
+    fileprivate func templateNavController(unselectedImage: UIImage, selectedImage: UIImage, rootViewController: UIViewController = UIViewController()) -> UINavigationController {
+        let viewController = rootViewController
         let navController = UINavigationController(rootViewController: viewController)
         navController.tabBarItem.image = unselectedImage
         navController.tabBarItem.selectedImage = selectedImage
