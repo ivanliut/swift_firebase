@@ -1,5 +1,5 @@
 //
-//  PhotoSelectorCell.swift
+//  PhotoSelectorHeader.swift
 //  app-firebase
 //
 //  Created by administrator on 6/8/19.
@@ -8,13 +8,12 @@
 
 import UIKit
 
-class PhotoSelectorCell: UICollectionViewCell {
-    
+class PhotoSelectorHeader: UICollectionViewCell {
     let photoImageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
-        iv.backgroundColor = .lightGray
+        iv.backgroundColor = .cyan
         return iv
     }()
     
