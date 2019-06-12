@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class SharePhotoController: UIViewController {
     
@@ -53,7 +54,62 @@ class SharePhotoController: UIViewController {
     }
     
     @objc func handleShare() {
-        print("Sharing photo")
+        guard let caption = textView.text, !caption.isEmpty else {
+            return
+        }
+        guard let image = selectedImage else { return }
+        guard let uploadData = image.jpegData(compressionQuality: 0.5) else { return }
+        
+        navigationItem.rightBarButtonItem?.isEnabled = false
+        
+        let filename = NSUUID().uuidString
+        let storageRef = Storage.storage().reference().child("posts").child(filename)
+            
+            storageRef.putData(uploadData, metadata: nil) { (metadata, error) in
+            if let err = error {
+                self.navigationItem.rightBarButtonItem?.isEnabled = true
+                print("Failed to upload post image", err)
+                return
+            }
+            storageRef.downloadURL(completion: { (url, error) in
+                if let error = error {
+                    print("Failed to download url:", error)
+                    return
+                }
+                
+                guard let imageUrl = url else { return }
+                print("Successfully uploaded image", imageUrl)
+                self.saveToDatabaseWithImageUrl(imageUrl: imageUrl.absoluteString)
+            })
+           
+        }
+    }
+    
+    fileprivate func saveToDatabaseWithImageUrl(imageUrl: String) {
+        guard let postImage = selectedImage else {
+            return
+        }
+        guard let caption = textView.text else {
+            return
+        }
+        
+        guard let uid = Auth.auth().currentUser?.uid else {
+            return
+        }
+        let userPostRef = Database.database().reference().child("posts").child(uid)
+        let ref = userPostRef.childByAutoId()
+        
+        let values = ["imageUrl": imageUrl, "caption": caption, "imageWidth": postImage.size.width, "imageHeight": postImage.size.height, "creationDate": Date().timeIntervalSince1970] as [String : Any]
+        ref.updateChildValues(values) { (err, ref) in
+            if let err = err {
+                self.navigationItem.rightBarButtonItem?.isEnabled = true
+                print("Failed to save post to DB", err)
+                return
+            }
+            
+            print("Successfully saved post to DB")
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     override var prefersStatusBarHidden: Bool {
