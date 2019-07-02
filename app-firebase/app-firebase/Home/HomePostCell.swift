@@ -17,6 +17,14 @@ class HomePostCell: UICollectionViewCell {
         }
     }
     
+    let userProfileImageView: CustomImageView = {
+        let iv = CustomImageView()
+        iv.contentMode = .scaleAspectFill
+        iv.clipsToBounds = true
+        iv.backgroundColor = .blue
+        return iv
+    }()
+    
     let photoImageView: CustomImageView = {
         let iv = CustomImageView()
         iv.contentMode = .scaleAspectFill
@@ -24,11 +32,26 @@ class HomePostCell: UICollectionViewCell {
         return iv
     }()
     
+    let usernameLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Username"
+        label.font = UIFont.boldSystemFont(ofSize: 14)
+        return label
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        addSubview(userProfileImageView)
+        addSubview(usernameLabel)
         addSubview(photoImageView)
         
-        photoImageView.anchor(top: topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        userProfileImageView.anchor(top: topAnchor, left: leftAnchor, bottom: nil, right: nil, paddingTop: 8, paddingLeft: 8, paddingBottom: 0, paddingRight: 0, width: 40, height: 40)
+        userProfileImageView.layer.cornerRadius = 40 / 2
+        
+        usernameLabel.anchor(top: topAnchor, left: userProfileImageView.rightAnchor, bottom: photoImageView.topAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 8, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        
+        photoImageView.anchor(top: userProfileImageView.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 8, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
     }
     
     required init?(coder aDecoder: NSCoder) {
