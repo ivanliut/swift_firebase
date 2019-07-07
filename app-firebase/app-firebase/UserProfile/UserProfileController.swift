@@ -31,8 +31,10 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         let ref = Database.database().reference().child("posts").child(uid)
         ref.queryOrdered(byChild: "creationDate").observe(.childAdded, with: { (snapshot) in
             guard let dictionary = snapshot.value as? [String: Any] else { return }
-            let post = Post(dictionary: dictionary)
-            self.posts.append(post)
+            
+            guard let user = self.user else { return }
+            let post = Post(user: user, dictionary: dictionary)
+            self.posts.insert(post, at: 0)
             self.collectionView.reloadData()
         }) { (err) in
             print("Failed to fetch ordered posts", err)
@@ -114,14 +116,4 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         }
     }
 
-}
-
-struct User {
-    let username: String
-    let profileImageUrl: String
-    
-    init(dictionary: [String: Any]) {
-        self.username = dictionary["username"] as? String ?? ""
-        self.profileImageUrl = dictionary["profileImageUrl"] as? String ?? ""
-    }
 }
